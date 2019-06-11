@@ -10,6 +10,7 @@ EXTRA_CFLAGS =	-std=gnu99				\
 		-Werror					\
 		-Wframe-larger-than=400			\
 		-Wno-declaration-after-statement	\
+		-Wno-vla			       	\
 		-DUDS_VERSION=\"$(UDS_VERSION)\"	\
 		$(INCLUDES)
 
