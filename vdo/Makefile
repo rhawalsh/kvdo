@@ -14,6 +14,7 @@ EXTRA_CFLAGS =	-std=gnu99					\
 		-Werror						\
 		-Wframe-larger-than=400				\
 		-Wno-declaration-after-statement		\
+		-Wno-vla					\
 		-DVDO_VERSION_MAJOR=$(VDO_VERSION_MAJOR)	\
 		-DVDO_VERSION_MINOR=$(VDO_VERSION_MINOR)	\
 		-DVDO_VERSION_MICRO=$(VDO_VERSION_MICRO)	\
