@@ -1938,14 +1938,6 @@ static int selectLatestIndexSaveLayout(SubIndexLayout   *sil,
 }
 
 /*****************************************************************************/
-static uint64_t getTimeMS(AbsTime time)
-{
-  time_t t = asTimeT(time);
-  RelTime r = timeDifference(time, fromTimeT(t));
-  return (uint64_t) t * 1000 + relTimeToMilliseconds(r);
-}
-
-/*****************************************************************************/
 __attribute__((warn_unused_result))
 static int instantiateIndexSaveLayout(IndexSaveLayout *isl,
                                       SuperBlockData  *super,
@@ -1986,7 +1978,7 @@ static int instantiateIndexSaveLayout(IndexSaveLayout *isl,
   isl->read = isl->written = false;
   isl->saveType = saveType;
   memset(&isl->saveData, 0, sizeof(isl->saveData));
-  isl->saveData.timestamp = getTimeMS(currentTime(CLOCK_REALTIME));
+  isl->saveData.timestamp = absTimeToMilliseconds(currentTime(CLOCK_REALTIME));
   isl->saveData.version   = 1;
 
   isl->saveData.nonce = generateIndexSaveNonce(volumeNonce, isl);
