@@ -110,6 +110,19 @@ RelTime timeDifference(AbsTime a, AbsTime b);
 
 
 /**
+ * Convert an AbsTime value to milliseconds
+ *
+ * @param abstime  The absolute time
+ *
+ * @return the equivalent number of millseconds since the epoch
+ **/
+static INLINE int64_t absTimeToMilliseconds(AbsTime abstime)
+{
+  return abstime / NSEC_PER_MSEC;
+}
+
+/**
+ *
  * Convert seconds to a RelTime value
  *
  * @param seconds  A number of seconds
@@ -216,13 +229,13 @@ static INLINE int64_t relTimeToNanoseconds(RelTime reltime)
 uint64_t nowUsec(void) __attribute__((warn_unused_result));
 
 /**
- * Convert from an AbsTime to a time_t
+ * Convert from an AbsTime to seconds truncating
  *
  * @param time  an AbsTime time
  *
- * @return a time_t time
+ * @return a 64 bit signed number of seconds
  **/
-static INLINE time_t asTimeT(AbsTime time)
+static INLINE int64_t absTimeToSeconds(AbsTime time)
 {
 #ifdef __KERNEL__
   return time / 1000000000;
@@ -232,13 +245,13 @@ static INLINE time_t asTimeT(AbsTime time)
 }
 
 /**
- * Convert from a time_t to an AbsTime,
+ * Convert from seconds to an AbsTime,
  *
- * @param time  a time_t time
+ * @param time  a 64 bit signed number of seconds
  *
  * @return an AbsTime time
  **/
-static INLINE AbsTime fromTimeT(time_t time)
+static INLINE AbsTime fromSeconds(int64_t time)
 {
 #ifdef __KERNEL__
   return time * 1000000000;
@@ -252,11 +265,23 @@ static INLINE AbsTime fromTimeT(time_t time)
 
 #ifndef __KERNEL__
 /**
- * Convert from an AbsTime to a struct timespec
+ * Convert from an AbsTime to a time_t
  *
  * @param time  an AbsTime time
  *
  * @return a time_t time
+ **/
+static INLINE time_t asTimeT(AbsTime time)
+{
+  return time / NSEC_PER_SEC;
+}
+
+/**
+ * Convert from an AbsTime to a struct timespec
+ *
+ * @param time  an AbsTime time
+ *
+ * @return a timespec time
  **/
 static INLINE struct timespec asTimeSpec(AbsTime time)
 {
@@ -270,7 +295,7 @@ static INLINE struct timespec asTimeSpec(AbsTime time)
  *
  * @param time  an AbsTime time
  *
- * @return a time_t time
+ * @return a struct timeval time
  **/
 static INLINE struct timeval asTimeVal(AbsTime time)
 {

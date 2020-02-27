@@ -179,7 +179,7 @@ typedef struct udsIndexStats {
  **/
 typedef struct udsContextStats {
   /** The time at which context statistics were last fetched */
-  time_t   currentTime;
+  int64_t  currentTime;
   /**
    * The number of post calls since context statistics were last reset that
    * found an existing entry
