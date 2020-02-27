@@ -82,12 +82,21 @@ static int statusDedupeOpen(struct inode *inode, struct file *file)
 #endif
 }
 
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(5,6,0)
+static const struct proc_ops vdoProcfsDedupeOps = {
+  .proc_open = statusDedupeOpen,
+  .proc_read = seq_read,
+  .proc_lseek = seq_lseek,
+  .proc_release = single_release,
+};
+#else
 static const struct file_operations vdoProcfsDedupeOps = {
   .open = statusDedupeOpen,
   .read = seq_read,
   .llseek = seq_lseek,
   .release = single_release,
 };
+#endif
 
 /**********************************************************************/
 static void copyBioStat(BioStats *b, const AtomicBioStats *a)
@@ -175,12 +184,21 @@ static int statusKernelOpen(struct inode *inode, struct file *file)
 #endif
 }
 
+#if LINUX_VERSION_CODE >= KERNEL_VERSION(5,6,0)
+static const struct proc_ops vdoProcfsKernelOps = {
+  .proc_open = statusKernelOpen,
+  .proc_read = seq_read,
+  .proc_lseek = seq_lseek,
+  .proc_release = single_release,
+};
+#else
 static const struct file_operations vdoProcfsKernelOps = {
   .open = statusKernelOpen,
   .read = seq_read,
   .llseek = seq_lseek,
   .release = single_release,
 };
+#endif
 
 /**********************************************************************/
 int vdoInitProcfs()
