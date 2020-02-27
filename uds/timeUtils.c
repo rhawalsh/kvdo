@@ -19,6 +19,7 @@
  * $Id: //eng/uds-releases/jasper/src/uds/timeUtils.c#4 $
  */
 
+#include "permassert.h"
 #include "stringUtils.h"
 #include "timeUtils.h"
 
