@@ -33,7 +33,7 @@ static void collectStats(const struct uds_index_session *indexSession,
 {
   const SessionStats *sessionStats = &indexSession->stats;
 
-  stats->currentTime = asTimeT(currentTime(CLOCK_REALTIME));
+  stats->currentTime = absTimeToSeconds(currentTime(CLOCK_REALTIME));
 
   stats->postsFound         = READ_ONCE(sessionStats->postsFound);
   stats->inMemoryPostsFound = READ_ONCE(sessionStats->postsFoundOpenChapter);
