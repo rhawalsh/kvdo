@@ -123,7 +123,11 @@ void logWorkQueueStats(const SimpleWorkQueue *queue)
 {
   uint64_t runtimeNS = 0;
   if (queue->thread != NULL) {
+#ifdef CONFIG_SCHED_MUQSS
+    runtimeNS += queue->thread->sched_time;
+#else /* CONFIG_SCHED_MUQSS */
     runtimeNS += queue->thread->se.sum_exec_runtime;
+#endif
   }
 
   unsigned long nsPerWorkItem = 0;
