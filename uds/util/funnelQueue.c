@@ -74,7 +74,9 @@ static FunnelQueueEntry *getOldest(FunnelQueue *queue)
     // without breaking the queue invariants.
     oldest = next;
     queue->oldest = oldest;
-    smp_read_barrier_depends();
+    // XXX Some platforms such as Alpha may require an
+    // additional barrier here.  See
+    // https://lkml.org/lkml/2019/11/8/1021
     next = oldest->next;
   }
 
