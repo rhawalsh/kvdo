@@ -291,7 +291,11 @@ static void sendBioToDevice(KVIO *kvio, BIO *bio, TraceLocation location)
   countAllBios(kvio, bio);
   kvioAddTraceRecord(kvio, location);
   bio->bi_next = NULL;
+#if LINUX_VERSION_CODE < KERNEL_VERSION(5,9,0)
   generic_make_request(bio);
+#else
+  submit_bio_noacct(bio);
+#endif
 }
 
 /**

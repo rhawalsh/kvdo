@@ -198,7 +198,11 @@ static void kvdoCompleteFlushWork(KvdoWorkItem *item)
     prepareFlushBIO(bio, bio->bi_private, getKernelLayerBdev(layer),
                     bio->bi_end_io);
     atomic64_inc(&layer->flushOut);
+#if LINUX_VERSION_CODE < KERNEL_VERSION(5,9,0)
     generic_make_request(bio);
+#else
+    submit_bio_noacct(bio);
+#endif
   }
 
 

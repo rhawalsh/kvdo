@@ -80,8 +80,8 @@ static KernelLayer *getKernelLayerForTarget(struct dm_target *ti)
 
 /**
  * Begin VDO processing of a bio.  This is called by the device mapper
- * through the "map" function, and has resulted from a call to either
- * submit_bio or generic_make_request.
+ * through the "map" function, and has resulted from a bio being
+ * submitted.
  *
  * @param ti      The dm_target.  We only need the "private" member to give
  *                us the KernelLayer.
@@ -95,11 +95,11 @@ static KernelLayer *getKernelLayerForTarget(struct dm_target *ti)
  *         DM_MAPIO_SUBMITTED  VDO will take care of this I/O, either
  *                             processing it completely and calling
  *                             bio_endio, or forwarding it onward by
- *                             calling generic_make_request.
+ *                             submitting it to the next layer.
  *
  *         DM_MAPIO_REMAPPED   VDO has modified the bio and the device
  *                             mapper will immediately forward the bio
- *                             onward using generic_make_request.
+ *                             onward by submitting it to the next layer.
  *
  *         DM_MAPIO_REQUEUE    We do not use this.  It is used by device
  *                             mapper devices to defer an I/O request
