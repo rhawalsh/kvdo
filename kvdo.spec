@@ -1,4 +1,4 @@
-%define spec_release 1
+%define spec_release 2
 %define kmod_name		kvdo
 %define kmod_driver_version	6.2.3.114
 %define kmod_rpm_release	%{spec_release}
@@ -85,5 +85,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_usr}/src/%{kmod_name}-%{version}-%{kmod_driver_version}/*
 
 %changelog
+* Thu Sep 03 2020 - Andy Walsh <awalsh@redhat.com> - 6.2.3.114-2
+- Updated __vmalloc() handling for 5.8+ kernels.
+- Replaced generic_make_request as needed for 5.9+ kernels.
+
 * Thu Jul 30 2020 - J. corwin Coburn <corwin@redhat.com> - 6.2.3.114-1
 HASH(0x14d09e8)
