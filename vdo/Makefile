@@ -12,7 +12,6 @@ INCLUDES = -I$(src)/base -I$(src)/kernel -I$(src)/../uds
 EXTRA_CFLAGS =	-std=gnu99					\
 		-fno-builtin-memset				\
 		-Werror						\
-		-Wframe-larger-than=400				\
 		-Wno-declaration-after-statement		\
 		-Wno-vla					\
 		-DVDO_VERSION_MAJOR=$(VDO_VERSION_MAJOR)	\
