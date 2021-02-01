@@ -95,7 +95,6 @@ EXPORT_SYMBOL_GPL(clearBuffer);
 EXPORT_SYMBOL_GPL(compactBuffer);
 EXPORT_SYMBOL_GPL(contentLength);
 EXPORT_SYMBOL_GPL(copyBytes);
-EXPORT_SYMBOL_GPL(currentTime);
 EXPORT_SYMBOL_GPL(duplicateString);
 EXPORT_SYMBOL_GPL(ensureAvailableSpace);
 EXPORT_SYMBOL_GPL(equalBuffers);
