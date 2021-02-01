@@ -1,4 +1,4 @@
-%define spec_release 1
+%define spec_release 2
 %define kmod_name		kvdo
 %define kmod_driver_version	6.2.4.26
 %define kmod_rpm_release	%{spec_release}
@@ -85,5 +85,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_usr}/src/%{kmod_name}-%{version}-%{kmod_driver_version}/*
 
 %changelog
+* Mon Feb 01 2020 - Red Hat VDO Group <vdo-devel@redhat.com> - 6.2.4.26-2
+- Removed currentTime() from exported symbols list for uds.
+- Temporarily disabled frame size checks.
+
 * Mon Nov 02 2020 - Red Hat VDO Group <vdo-devel@redhat.com> - 6.2.4.26-1
 HASH(0x5645fb62bab0)
